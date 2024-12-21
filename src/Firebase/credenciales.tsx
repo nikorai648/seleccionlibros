@@ -1,3 +1,4 @@
+// credenciales.tsx
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyD5Zps_Bylb4cDfeho-dMwv5yZ4LK4jd5o",
