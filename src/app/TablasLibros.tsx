@@ -37,6 +37,30 @@ export const TablaLibros = () => {
             <th>Genero</th>
             </tr>
         </thead>
+        <tbody>
+            {
+                ILibro.map((libro)=>{return(
+                    <tr>
+                        <td>{libro.nombre}</td>
+                        <td>{libro.autor}</td>
+                        <td>{libro.editorial}</td>
+                        <td>{libro.anio}</td>
+                        <td>{libro.valoracion}</td>
+                        <td>{libro.pais}</td>
+                        <td>{libro.sexomasculino}</td>
+                        <td>{libro.sexofemenino}</td>
+                        <td>{libro.genero}</td>
+                        <td>
+                        <Button variant='warning'>Actualizar</Button>
+                        <Button variant='danger'>Eliminar</Button>
+                        </td>
+                    </tr>
+
+                
+
+                })
+            }
+        </tbody>
 
 
     </Table>
