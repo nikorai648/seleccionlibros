@@ -55,17 +55,28 @@ export const TablaLibros = () => {
                         <Button variant='danger'>Eliminar</Button>
                         </td>
                     </tr>
-
-                
-
-                })
+                )})
             }
         </tbody>
-
-
     </Table>
-    
-    
-    
+
+    {
+        ILibro.map((libro)=>{return(
+            <Card style={{ width: '18rem' }}>
+            <Card.Img variant="top" src="holder.js/100px180" />
+            <Card.Body>
+              <Card.Title>{libro.nombre} {libro.autor}</Card.Title>
+              <Card.Text>
+                <h6>Datos</h6>
+                <p>Años:{libro.anio}</p>
+              </Card.Text>
+              <Button variant="warning">Editar</Button>
+              <Button variant="danger">Eliminar</Button>
+            </Card.Body>
+          </Card>
+        )})
+    }
     </>
+    )
 }
+export default TablaLibros
