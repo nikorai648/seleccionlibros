@@ -1,4 +1,5 @@
 export interface ILibro{
+   id: string;
    nombre:string
    autor: string
    editorial: string
