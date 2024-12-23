@@ -4,14 +4,17 @@ import { useNavigate } from 'react-router-dom';
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'admin' && password === 'admin') {
+    if (!username || !password) {
+      setError('Por favor, ingrese usuario y contraseña.');
+    } else if (username === 'admin' && password === 'admin') {
       navigate('/menu');
     } else {
-      alert('Acceso denegado');
+      setError('Credenciales incorrectas. Intente nuevamente.');
     }
   };
 
@@ -41,6 +44,7 @@ const Login: React.FC = () => {
             required
           />
         </div>
+        {error && <div className="alert alert-danger">{error}</div>}
         <button type="submit" className="btn btn-primary">Iniciar Sesión</button>
       </form>
     </div>

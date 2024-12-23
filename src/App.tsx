@@ -4,6 +4,7 @@ import Login from './Login';
 import Menu from './Menu';
 import RegistroTematica from './RegistroTematica';
 import Visualizar from './Visualizar';
+import RegistrarUsuario from './RegistrarUsuario';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Route path="/menu" element={<Menu />} />
         <Route path="/registro-tematica" element={<RegistroTematica />} />
         <Route path="/visualizar" element={<Visualizar />} />
+        <Route path="/registrar-usuario" element={<RegistrarUsuario />} /> 
       </Routes>
     </Router>
   );
