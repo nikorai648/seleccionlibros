@@ -1,16 +1,17 @@
-'use client'; // Esto es necesario para que se ejecute el código en el lado del cliente
+'use client';
 
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link'; // Usar Link de Next.js
+import Link from 'next/link';
 
 const Menu: React.FC = () => {
   const router = useRouter();
 
+  // Verificar si el usuario está autenticado
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('isAuthenticated');
     if (!isAuthenticated) {
-      router.push('/');  // Redirige al Login si no está autenticado
+      router.push('/');  // Si no está autenticado, redirigir a Login
     }
   }, [router]);
 
