@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
+import Login from './app/Login';
 import Menu from './Menu';
 import RegistroTematica from './RegistroTematica';
 import Visualizar from './Visualizar';
