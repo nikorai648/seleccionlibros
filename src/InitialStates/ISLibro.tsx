@@ -1,6 +1,7 @@
 import { ILibro } from "@/Interfaces/ILibro";
 
 export const iSLibro:ILibro = {
+    id:'',
     nombre:'',
     autor:'',
     editorial:'',
