@@ -4,7 +4,7 @@ import { ILibro } from "@/Interfaces/ILibro";
 import React, { useEffect, useState } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/navigation";
 import { Modal } from 'react-bootstrap';
 
 export const TablaLibros = () => {
