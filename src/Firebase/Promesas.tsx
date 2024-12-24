@@ -24,8 +24,7 @@ export const obtenerLibros = async () => {
             anio: doc.data()['año'], // Asegúrate de que el campo coincida con el nombre exacto en Firestore
             valoracion: doc.data()['valoracion'],
             pais: doc.data()['pais'],
-            sexomasculino: doc.data()['sexomasculino'],
-            sexofemenino: doc.data()['sexofemenino'], // Asegúrate de que el nombre coincida con el campo en Firestore
+            sexo: doc.data()['sexomasculino'],
             genero: doc.data()['genero']
         };
 

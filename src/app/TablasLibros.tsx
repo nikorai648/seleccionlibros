@@ -81,7 +81,7 @@ export const TablaLibros = () => {
               <td>{libro.anio}</td>
               <td>{libro.valoracion}</td>
               <td>{libro.pais}</td>
-              <td>{libro.sexomasculino}</td>
+              <td>{libro.sexo}</td>
               <td>{libro.genero}</td>
               <td>
                 <Button variant="warning" onClick={() => handleActualizar(libro)}>

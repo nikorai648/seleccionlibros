@@ -6,8 +6,7 @@ export interface ILibro{
    anio: number
    valoracion: number
    pais: string
-   sexomasculino: string
-   sexofemenino: string
+   sexo:string
    genero: string
 
 }

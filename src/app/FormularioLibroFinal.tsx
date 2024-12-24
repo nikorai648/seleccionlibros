@@ -5,126 +5,118 @@ import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export const FormularioLibroFinal=() => {
-    const[libro,setLibro] = useState(iSLibro)
-    const handleLibro = (estado:string,valor:string)=>{
-        if(estado=="nombre" || estado=="autor" || estado=="editorial" || estado=="año" || estado=="valoracion" || estado=="pais" || estado=="sexomasculino" || estado=="sexofemenino" || estado=="genero"){
-            setLibro({...libro,[estado]:valor})
+export const FormularioLibroFinal = () => {
+    const [libro, setLibro] = useState(iSLibro);
+    const [errorSexo, setErrorSexo] = useState(false); // Estado para manejar el error de sexo
+
+    const handleLibro = (estado: string, valor: string) => {
+        if (estado === "nombre" || estado === "autor" || estado === "editorial" || estado === "año" || estado === "valoracion" || estado === "pais" || estado === "sexo" || estado === "genero") {
+            setLibro({ ...libro, [estado]: valor });
         }
     }
-    const handleRegistrar = ()=>{
-        console.log("le diste al boton")
-      alert("Vas a registrar")
-      console.log(libro)
-      registrarLibro(libro).then(()=>{
-               //then es para hacer algo si la promesa se cumple
-               alert("Se registro")
-            }).catch((e)=>{
-                //catch si la promesa falla
-                alert("Algo fallo")
-      })
+
+    const handleRegistrar = () => {
+        // Validación de sexo
+        if (!libro.sexo) {
+            setErrorSexo(true);
+            return; // Si no se selecciona un sexo, no registrar el libro
+        }
+
+        setErrorSexo(false); // Reseteamos el error de sexo
+        console.log("le diste al boton");
+        alert("Vas a registrar");
+        console.log(libro);
+
+        registrarLibro(libro).then(() => {
+            alert("Se registro");
+        }).catch((e) => {
+            alert("Algo fallo");
+        });
     }
+
     return (
         <>
-        <h1>Formulario Final</h1>
+            <h1>Formulario Final</h1>
             <p>Nombre: {libro.nombre}</p>
             <p>Autor: {libro.autor}</p>
             <p>Editorial: {libro.editorial}</p>
             <p>Año: {libro.anio}</p>
             <p>Valoración: {libro.valoracion}</p>
             <p>País de Origen: {libro.pais}</p>
-            <p>Sexo: {libro.sexomasculino}</p>
-            <p>Sexo: {libro.sexofemenino}</p>
+            <p>Sexo: {libro.sexo}</p>
             <p>Género: {libro.genero}</p>
 
             <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Label>Nombre</Form.Label>
-             <Form.Control type="email" placeholder="Ingrese un nombre"
-              name='nombre'
-        onChange={((e)=>{handleLibro(e.currentTarget.name,e.currentTarget.value)})}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Label>Autor</Form.Label>
-             <Form.Control type="email" placeholder="Ingrese un nombre de autor"
-              name='nombre'
-        onChange={((e)=>{handleLibro(e.currentTarget.name,e.currentTarget.value)})}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Label>Editorial</Form.Label>
-             <Form.Control type="email" placeholder="Ingrese un editorial"
-              name='nombre'
-        onChange={((e)=>{handleLibro(e.currentTarget.name,e.currentTarget.value)})}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Label>Año</Form.Label>
-             <Form.Control type="email" placeholder="Ingrese un año"
-              name='nombre'
-        onChange={((e)=>{handleLibro(e.currentTarget.name,e.currentTarget.value)})}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Label>Valoración</Form.Label>
-             <Form.Control type="email" placeholder="Ingrese una valoracion"
-              name='nombre'
-        onChange={((e)=>{handleLibro(e.currentTarget.name,e.currentTarget.value)})}
-        />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-             <Form.Label>País</Form.Label>
-             <Form.Control type="email" placeholder="Ingrese un pais"
-              name='nombre'
-        onChange={((e)=>{handleLibro(e.currentTarget.name,e.currentTarget.value)})}
-        />
-      </Form.Group>
-
-      {/* Sexos */}
-      <Form.Group className="mb-3">
-                    <Form.Label>Sexo Masculino</Form.Label>
-                    <Form.Check
-                        type="radio"
-                        label="Sí"
-                        name="sexomasculino"
-                        value="Sí"
-                        checked={libro.sexomasculino === "Sí"}
-                        onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
-                    />
-                    <Form.Check
-                        type="radio"
-                        label="No"
-                        name="sexomasculino"
-                        value="No"
-                        checked={libro.sexomasculino === "No"}
-                        onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Nombre</Form.Label>
+                    <Form.Control type="text" placeholder="Ingrese un nombre"
+                        name='nombre'
+                        onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
                     />
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Autor</Form.Label>
+                    <Form.Control type="text" placeholder="Ingrese un nombre de autor"
+                        name='autor'
+                        onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Editorial</Form.Label>
+                    <Form.Control type="text" placeholder="Ingrese un editorial"
+                        name='editorial'
+                        onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Año</Form.Label>
+                    <Form.Control type="text" placeholder="Ingrese un año"
+                        name='anio'
+                        onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Valoración</Form.Label>
+                    <Form.Control type="text" placeholder="Ingrese una valoración"
+                        name='valoracion'
+                        onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>País</Form.Label>
+                    <Form.Control type="text" placeholder="Ingrese un país"
+                        name='pais'
+                        onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
+                    />
+                </Form.Group>
+
+                {/* Sexo */}
                 <Form.Group className="mb-3">
-                    <Form.Label>Sexo Femenino</Form.Label>
-                    <Form.Check
-                        type="radio"
-                        label="Sí"
-                        name="sexofemenino"
-                        value="Sí"
-                        checked={libro.sexofemenino === "Sí"}
-                        onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
-                    />
-                    <Form.Check
-                        type="radio"
-                        label="No"
-                        name="sexofemenino"
-                        value="No"
-                        checked={libro.sexofemenino === "No"}
-                        onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
-                    />
+                    <Form.Label>Sexo</Form.Label>
+                    <div>
+                        <Form.Check
+                            type="radio"
+                            label="Masculino"
+                            name="sexo"
+                            value="Masculino"
+                            checked={libro.sexo === "Masculino"}
+                            onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
+                        />
+                        <Form.Check
+                            type="radio"
+                            label="Femenino"
+                            name="sexo"
+                            value="Femenino"
+                            checked={libro.sexo === "Femenino"}
+                            onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
+                        />
+                    </div>
+                    {errorSexo && <div style={{ color: 'red' }}>Por favor, seleccione un sexo.</div>}
                 </Form.Group>
 
                 {/* Género */}
@@ -138,9 +130,11 @@ export const FormularioLibroFinal=() => {
                         onChange={(e) => handleLibro(e.currentTarget.name, e.currentTarget.value)}
                     />
                 </Form.Group>
+
                 <Button variant="primary" onClick={handleRegistrar}> Registrar Libro</Button>
             </Form>
         </>
     );
 }
-export default FormularioLibroFinal
+
+export default FormularioLibroFinal;

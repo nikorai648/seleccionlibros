@@ -8,7 +8,6 @@ export const iSLibro:ILibro = {
     anio:0,
     valoracion:0,
     pais:'',
-    sexomasculino:'',
-    sexofemenino:'',
+    sexo:'',
     genero:''
 }
