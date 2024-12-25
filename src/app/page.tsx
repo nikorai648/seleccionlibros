@@ -1,7 +1,7 @@
 // src/app/page.tsx
 
 import 'bootstrap/dist/css/bootstrap.min.css';  // Asegúrate de mantener la importación de Bootstrap
-import Login from './login/Login';  // Ajusta la ruta si el componente Login está en otro directorio
+import Login from './login/page';  // Ajusta la ruta si el componente Login está en otro directorio
 
 export default function Home() {
   return (
