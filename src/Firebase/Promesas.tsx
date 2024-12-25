@@ -1,57 +1,66 @@
 import { ILibro } from "@/Interfaces/ILibro";
-import { addDoc, collection, doc, getDocs, setDoc, deleteDoc, updateDoc } from "firebase/firestore"; 
+import { addDoc, collection, doc, getDocs, updateDoc, deleteDoc } from "firebase/firestore"; 
 import { db } from "./Firebase";
 
 // Registrar un libro
-export const registrarLibro = async(libro: ILibro) => {
-    const docRef = await addDoc(collection(db, "libro"), libro);
-}
+export const registrarLibro = async (libro: ILibro): Promise<void> => {
+    try {
+        const docRef = await addDoc(collection(db, "libro"), libro);
+        console.log("Libro registrado con ID:", docRef.id);
+    } catch (error) {
+        console.error("Error registrando libro:", error);
+        throw new Error("No se pudo registrar el libro");
+    }
+};
 
 // Obtener todos los libros
-export const obtenerLibros = async () => {
-    const querySnapshot = await getDocs(collection(db, "libro"));
-    let libros: ILibro[] = [];
+export const obtenerLibros = async (): Promise<ILibro[]> => {
+    try {
+        const querySnapshot = await getDocs(collection(db, "libro"));
+        const libros: ILibro[] = [];
 
-    querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
+        querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            libros.push({
+                id: doc.id,
+                nombre: data['nombre'],
+                autor: data['autor'],
+                editorial: data['editorial'],
+                anio: data['año'], // Asegúrate de que este campo coincida en Firestore
+                valoracion: data['valoracion'],
+                pais: data['pais'],
+                sexo: data['sexo'], // Cambia esto si usas "sexomasculino" en Firestore
+                genero: data['genero'],
+            });
+        });
 
-        // Crear un objeto ILibro a partir de los datos del documento
-        let libro: ILibro = {
-            id: doc.id, // El id está disponible directamente como doc.id
-            nombre: doc.data()['nombre'],
-            autor: doc.data()['autor'],
-            editorial: doc.data()['editorial'],
-            anio: doc.data()['año'], // Asegúrate de que el campo coincida con el nombre exacto en Firestore
-            valoracion: doc.data()['valoracion'],
-            pais: doc.data()['pais'],
-            sexo: doc.data()['sexomasculino'],
-            genero: doc.data()['genero']
-        };
-
-        libros.push(libro);
-    });
-
-    return libros;
-}
+        return libros;
+    } catch (error) {
+        console.error("Error obteniendo libros:", error);
+        throw new Error("No se pudo obtener la lista de libros");
+    }
+};
 
 // Actualizar un libro existente
-export const actualizarLibro = async (id: string, libro: Partial<ILibro>) => {
+export const actualizarLibro = async (id: string, libro: Partial<ILibro>): Promise<void> => {
     try {
         const libroRef = doc(db, "libro", id);
         await updateDoc(libroRef, libro);
         console.log("Libro actualizado:", id);
     } catch (error) {
         console.error("Error actualizando libro:", error);
+        throw new Error("No se pudo actualizar el libro");
     }
-}
+};
 
 // Eliminar un libro
-export const eliminarLibro = async (id: string) => {
+export const eliminarLibro = async (id: string): Promise<void> => {
     try {
         const libroRef = doc(db, "libro", id);
         await deleteDoc(libroRef);
         console.log("Libro eliminado:", id);
     } catch (error) {
         console.error("Error eliminando libro:", error);
+        throw new Error("No se pudo eliminar el libro");
     }
-}
+};
