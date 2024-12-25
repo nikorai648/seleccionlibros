@@ -44,6 +44,13 @@ const Visualizar: React.FC = () => {
     editedLibro.nombre = prompt('Ingrese un nuevo nombre:', editedLibro.nombre) || editedLibro.nombre;
     editedLibro.autor = prompt('Ingrese un nuevo autor:', editedLibro.autor) || editedLibro.autor;
     editedLibro.editorial = prompt('Ingrese una nueva editorial:', editedLibro.editorial) || editedLibro.editorial;
+    const anioInput = prompt('Ingrese el año de publicación:', editedLibro.anio?.toString());
+    editedLibro.anio = anioInput ? parseInt(anioInput) : editedLibro.anio;
+    const valoracionInput = prompt('Ingrese la valoración:', editedLibro.valoracion?.toString());
+    editedLibro.valoracion = valoracionInput ? parseFloat(valoracionInput) : editedLibro.valoracion;
+    editedLibro.pais = prompt('Ingrese el país:', editedLibro.pais) || editedLibro.pais;
+    editedLibro.sexo = prompt('Ingrese el sexo (masculino/femenino):', editedLibro.sexo) || editedLibro.sexo;
+    editedLibro.genero = prompt('Ingrese el género (ej. Ficción, Ciencia, etc.):', editedLibro.genero) || editedLibro.genero;
 
     // Verificar que todos los campos sean válidos antes de actualizar
     if (!editedLibro.nombre || !editedLibro.autor || !editedLibro.editorial) {
