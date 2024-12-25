@@ -1,5 +1,5 @@
 import React from 'react';
-import FormularioLibroFinal from './app/FormularioLibroFinal';
+import FormularioLibroFinal from './FormularioLibroFinal';
 
 const RegistroTematica = () => {
     return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ILibro } from './Interfaces/ILibro';
-import { iSLibro } from './InitialStates/ISLibro';
+import { ILibro } from '@/Interfaces/ILibro';
+import { iSLibro } from '@/InitialStates/ISLibro';
 
 const Visualizar: React.FC = () => {
   const [libros, setLibros] = useState<ILibro[]>([]);
@@ -58,8 +58,7 @@ const Visualizar: React.FC = () => {
               <td>{libro.anio}</td>
               <td>{libro.valoracion}</td>
               <td>{libro.pais}</td>
-              <td>{libro.sexomasculino}</td>
-              <td>{libro.sexofemenino}</td>
+              <td>{libro.sexo}</td>
               <td>{libro.genero}</td>
               <td>
                 <button className="btn btn-warning me-2" onClick={() => handleEdit(index)}>Editar</button>
