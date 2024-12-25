@@ -10,29 +10,33 @@ export const FormularioLibroFinal = () => {
     const [errorSexo, setErrorSexo] = useState(false); // Estado para manejar el error de sexo
 
     const handleLibro = (estado: string, valor: string) => {
-        if (estado === "nombre" || estado === "autor" || estado === "editorial" || estado === "año" || estado === "valoracion" || estado === "pais" || estado === "sexo" || estado === "genero") {
-            setLibro({ ...libro, [estado]: valor });
-        }
-    }
+        // Convertir valores específicos a tipo numérico si es necesario
+        const newValue =
+            estado === "anio" || estado === "valoracion"
+                ? Number(valor) // Convertir a número
+                : valor; // Mantener como texto para los demás casos
 
-    const handleRegistrar = () => {
+        setLibro({ ...libro, [estado]: newValue });
+    };
+
+    const handleRegistrar = async () => {
         if (!libro.sexo) {
             setErrorSexo(true);
             return;
         }
         setErrorSexo(false);
-    
-        // Obtener libros existentes en localStorage
-        const existingLibros = JSON.parse(localStorage.getItem('libros') || '[]');
-        const updatedLibros = [...existingLibros, libro];
-    
-        // Guardar libros actualizados en localStorage
-        localStorage.setItem('libros', JSON.stringify(updatedLibros));
-    
-        alert("Se registró el libro exitosamente");
-        setLibro(iSLibro); // Reiniciar el formulario
+
+        try {
+            await registrarLibro(libro); // Firebase
+            alert("Libro registrado exitosamente en Firebase");
+        } catch (error) {
+            alert("Error al registrar en Firebase. Se usará LocalStorage.");
+            const existingLibros = JSON.parse(localStorage.getItem('libros') || '[]');
+            const updatedLibros = [...existingLibros, libro];
+            localStorage.setItem('libros', JSON.stringify(updatedLibros));
+        }
+        setLibro(iSLibro);
     };
-    
 
     return (
         <>
@@ -47,7 +51,7 @@ export const FormularioLibroFinal = () => {
             <p>Género: {libro.genero}</p>
 
             <Form>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicNombre">
                     <Form.Label>Nombre</Form.Label>
                     <Form.Control type="text" placeholder="Ingrese un nombre"
                         name='nombre'
@@ -55,7 +59,7 @@ export const FormularioLibroFinal = () => {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicAutor">
                     <Form.Label>Autor</Form.Label>
                     <Form.Control type="text" placeholder="Ingrese un nombre de autor"
                         name='autor'
@@ -63,7 +67,7 @@ export const FormularioLibroFinal = () => {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicEditorial">
                     <Form.Label>Editorial</Form.Label>
                     <Form.Control type="text" placeholder="Ingrese un editorial"
                         name='editorial'
@@ -71,23 +75,23 @@ export const FormularioLibroFinal = () => {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicAnio">
                     <Form.Label>Año</Form.Label>
-                    <Form.Control type="text" placeholder="Ingrese un año"
+                    <Form.Control type="number" placeholder="Ingrese un año"
                         name='anio'
                         onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicValoracion">
                     <Form.Label>Valoración</Form.Label>
-                    <Form.Control type="text" placeholder="Ingrese una valoración"
+                    <Form.Control type="number" placeholder="Ingrese una valoración"
                         name='valoracion'
                         onChange={(e) => { handleLibro(e.currentTarget.name, e.currentTarget.value) }}
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3" controlId="formBasicPais">
                     <Form.Label>País</Form.Label>
                     <Form.Control type="text" placeholder="Ingrese un país"
                         name='pais'
@@ -131,10 +135,11 @@ export const FormularioLibroFinal = () => {
                     />
                 </Form.Group>
 
-                <Button variant="primary" onClick={handleRegistrar}> Registrar Libro</Button>
+                <Button variant="primary" onClick={handleRegistrar}>Registrar Libro</Button>
             </Form>
         </>
     );
 }
 
 export default FormularioLibroFinal;
+
