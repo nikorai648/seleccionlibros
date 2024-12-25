@@ -1,3 +1,5 @@
+'use client'; // Marca este archivo como un componente del lado del cliente
+
 import React, { useState, useEffect } from 'react';
 import { ILibro } from '@/Interfaces/ILibro';
 import { iSLibro } from '@/InitialStates/ISLibro';
@@ -42,8 +44,7 @@ const Visualizar: React.FC = () => {
             <th>Año</th>
             <th>Valoración</th>
             <th>País</th>
-            <th>Sexo Masculino</th>
-            <th>Sexo Femenino</th>
+            <th>Sexo</th>
             <th>Género</th>
             <th>Acciones</th>
           </tr>
@@ -73,3 +74,4 @@ const Visualizar: React.FC = () => {
 };
 
 export default Visualizar;
+
