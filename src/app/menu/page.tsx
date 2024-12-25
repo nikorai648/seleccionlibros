@@ -7,7 +7,7 @@ import Link from 'next/link';
 const Menu: React.FC = () => {
   const router = useRouter();
 
-  // Verificar si el usuario está autenticado
+  // Verifica si el usuario está autenticado
   useEffect(() => {
     const isAuthenticated = localStorage.getItem('isAuthenticated');
     if (!isAuthenticated) {

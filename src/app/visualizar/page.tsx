@@ -10,7 +10,7 @@ const Visualizar: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
 
-  // Cargar libros desde Firebase
+  // Carga libros desde Firebase
   useEffect(() => {
     const fetchData = async () => {
       const librosFirebase = await obtenerLibros();
@@ -21,7 +21,7 @@ const Visualizar: React.FC = () => {
 
   const handleDelete = async () => {
     if (deleteIndex !== null) {
-        const libroId = libros[deleteIndex].id; // Obtener el ID del libro a eliminar
+        const libroId = libros[deleteIndex].id; // Obteniene el ID del libro a eliminar
         try {
             // Eliminar el libro en Firestore
             await eliminarLibro(libroId);
@@ -36,11 +36,11 @@ const Visualizar: React.FC = () => {
 };
 
 
-  // Editar libro tanto en Firebase como local
+  
   const handleEdit = async (index: number) => {
     const editedLibro = { ...libros[index] };
     
-    // Solicitar nuevos valores al usuario
+    // Solicita nuevos valores al usuario
     editedLibro.nombre = prompt('Ingrese un nuevo nombre:', editedLibro.nombre) || editedLibro.nombre;
     editedLibro.autor = prompt('Ingrese un nuevo autor:', editedLibro.autor) || editedLibro.autor;
     editedLibro.editorial = prompt('Ingrese una nueva editorial:', editedLibro.editorial) || editedLibro.editorial;
@@ -58,12 +58,12 @@ const Visualizar: React.FC = () => {
         return;  // No continuar si algún campo es vacío
     }
 
-    // Actualizar el estado local
+    // Actualiza el estado local
     const updatedLibros = [...libros];
     updatedLibros[index] = editedLibro;
     setLibros(updatedLibros);
 
-    // Asegurarse de que el resto de los campos están definidos, sino asignar valores por defecto
+    // Se asegurade que el resto de los campos están definidos, sino asignar valores por defecto
     const libroAActualizar: Partial<ILibro> = {
         nombre: editedLibro.nombre,
         autor: editedLibro.autor,
@@ -75,7 +75,7 @@ const Visualizar: React.FC = () => {
         genero: editedLibro.genero ?? "",
     };
 
-    // Actualizar el libro en Firestore
+    // Actualiza el libro en Firestore
     try {
         await actualizarLibro(editedLibro.id, libroAActualizar);
     } catch (error) {

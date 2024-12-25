@@ -10,11 +10,10 @@ export const FormularioLibroFinal = () => {
     const [errorSexo, setErrorSexo] = useState(false); // Estado para manejar el error de sexo
 
     const handleLibro = (estado: string, valor: string) => {
-        // Convertir valores específicos a tipo numérico si es necesario
         const newValue =
             estado === "anio" || estado === "valoracion"
-                ? Number(valor) // Convertir a número
-                : valor; // Mantener como texto para los demás casos
+                ? Number(valor) // Convierte a número
+                : valor; 
 
         setLibro({ ...libro, [estado]: newValue });
     };

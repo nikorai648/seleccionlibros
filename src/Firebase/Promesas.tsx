@@ -2,7 +2,7 @@ import { ILibro } from "@/Interfaces/ILibro";
 import { addDoc, collection, doc, getDocs, updateDoc, deleteDoc } from "firebase/firestore"; 
 import { db } from "./Firebase";
 
-// Registrar un libro
+// Registra un libro
 export const registrarLibro = async (libro: ILibro): Promise<void> => {
     try {
         const docRef = await addDoc(collection(db, "libro"), libro);
@@ -13,7 +13,7 @@ export const registrarLibro = async (libro: ILibro): Promise<void> => {
     }
 };
 
-// Obtener todos los libros
+// Obtiene todos los libros
 export const obtenerLibros = async (): Promise<ILibro[]> => {
     try {
         const querySnapshot = await getDocs(collection(db, "libro"));
@@ -26,10 +26,10 @@ export const obtenerLibros = async (): Promise<ILibro[]> => {
                 nombre: data['nombre'],
                 autor: data['autor'],
                 editorial: data['editorial'],
-                anio: data['año'], // Asegúrate de que este campo coincida en Firestore
+                anio: data['año'], //  se Asegura de que este campo coincida en Firestore
                 valoracion: data['valoracion'],
                 pais: data['pais'],
-                sexo: data['sexo'], // Cambia esto si usas "sexomasculino" en Firestore
+                sexo: data['sexo'], 
                 genero: data['genero'],
             });
         });
@@ -41,7 +41,7 @@ export const obtenerLibros = async (): Promise<ILibro[]> => {
     }
 };
 
-// Actualizar un libro existente
+// Actualiza un libro existente
 export const actualizarLibro = async (id: string, libro: Partial<ILibro>): Promise<void> => {
     try {
         const libroRef = doc(db, "libro", id);
@@ -53,7 +53,7 @@ export const actualizarLibro = async (id: string, libro: Partial<ILibro>): Promi
     }
 };
 
-// Eliminar un libro
+// Elimina un libro
 export const eliminarLibro = async (id: string): Promise<void> => {
     try {
         const libroRef = doc(db, "libro", id);

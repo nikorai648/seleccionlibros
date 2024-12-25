@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import FormularioLibroFinal from '@/app/FormularioLibroFinal'; // Ajusta la ruta según la ubicación del componente
+import FormularioLibroFinal from '@/app/FormularioLibroFinal'; // Ajusta la ruta según la ubicación del folder
 
 const RegistroTematica = () => {
     return (
