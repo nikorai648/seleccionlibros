@@ -16,23 +16,23 @@ export const FormularioLibroFinal = () => {
     }
 
     const handleRegistrar = () => {
-        // Validación de sexo
         if (!libro.sexo) {
             setErrorSexo(true);
-            return; // Si no se selecciona un sexo, no registrar el libro
+            return;
         }
-
-        setErrorSexo(false); // Reseteamos el error de sexo
-        console.log("le diste al boton");
-        alert("Vas a registrar");
-        console.log(libro);
-
-        registrarLibro(libro).then(() => {
-            alert("Se registro");
-        }).catch((e) => {
-            alert("Algo fallo");
-        });
-    }
+        setErrorSexo(false);
+    
+        // Obtener libros existentes en localStorage
+        const existingLibros = JSON.parse(localStorage.getItem('libros') || '[]');
+        const updatedLibros = [...existingLibros, libro];
+    
+        // Guardar libros actualizados en localStorage
+        localStorage.setItem('libros', JSON.stringify(updatedLibros));
+    
+        alert("Se registró el libro exitosamente");
+        setLibro(iSLibro); // Reiniciar el formulario
+    };
+    
 
     return (
         <>
