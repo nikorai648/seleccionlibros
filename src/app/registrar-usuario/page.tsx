@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 
 const RegistrarUsuario: React.FC = () => {
@@ -7,10 +9,8 @@ const RegistrarUsuario: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para guardar el usuario en la base de datos o en LocalStorage
     console.log('Usuario registrado:', { nombre, email, password });
     alert('Usuario registrado correctamente');
-    // Limpiar campos después del registro
     setNombre('');
     setEmail('');
     setPassword('');

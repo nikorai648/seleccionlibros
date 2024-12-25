@@ -19,7 +19,7 @@ const Menu: React.FC = () => {
     <div className="container mt-5">
       <h2>Menú Principal</h2>
       <ul>
-        <li><Link href="/registrar-usuario">Registrar nuevo usuario</Link></li>
+      <li><Link href="/registrar-usuario">Registrar nuevo usuario</Link></li>
         <li><Link href="/registro-tematica">Registro según temática</Link></li>
         <li><Link href="/visualizar">Visualizar lo registrado</Link></li>
         <li><Link href="/">Salir</Link></li>
